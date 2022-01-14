@@ -1,4 +1,5 @@
 import React from 'react';
+import AddPost from './components/addPost';
 
 import Post from './Post';
 
@@ -13,18 +14,27 @@ class App extends React.Component {
         {name: "Reyner", content:"Pagod na ako!", likes:0},
       ]
     }
+
+    this.addPost = this.addPost.bind(this) 
   }
 
+  addPost(post) {
+    this.setState(previousState => ({
+      posts: [...previousState.posts, post]
+  }));
+     }
 
   render() {
     return (
       <div className='container w-full bg-gray-300'>
-        <div className='container max-w-7xl mx-auto flex flex-wrap items-center h-screen'>
+        <div className='container max-w-7xl mx-auto flex flex-wrap items-center h-full'>
 
-        {this.state.posts.map(post => (
-          <Post name={post.name} content={post.content} likes={post.likes} key={post.name} />
+        {this.state.posts.map((post,i) => (
+          <Post name={post.name} content={post.content} likes={post.likes} key={i} />
         ))}
       </div>
+
+      <AddPost postHandler={this.addPost}  />
         </div>
     );
   }}
