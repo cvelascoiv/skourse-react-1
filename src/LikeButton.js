@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import Like from './like.svg';
 export default class LikeButton extends Component {
     constructor(props) {
         super(props);
@@ -13,12 +13,14 @@ export default class LikeButton extends Component {
             count: this.state.count + 1
         })
     }
-
     render(){
+        console.log(Like)
         return (
-            <div>
-                <p>{this.state.count}</p>
-                <button onClick={this.increment}>Like</button>
+            <div className='container flex flex-col items-center justify-center'>
+
+                <p className='text-center'>{this.state.count}</p>
+                <button onClick={this.increment}><img src={Like} alt="Like" className='w-8 h-8' />
+</button>
             </div>
         )
     }

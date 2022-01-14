@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Post from './Post';
-import './App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,11 +18,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='app'>
+      <div className='container w-full bg-gray-300'>
+        <div className='container max-w-7xl mx-auto flex flex-wrap items-center h-screen'>
+
         {this.state.posts.map(post => (
-          <Post name={post.name} content={post.content} likes={post.likes} />
+          <Post name={post.name} content={post.content} likes={post.likes} key={post.name} />
         ))}
       </div>
+        </div>
     );
   }}
 
