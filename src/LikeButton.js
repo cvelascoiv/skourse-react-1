@@ -14,7 +14,6 @@ export default class LikeButton extends Component {
         })
     }
     render(){
-        console.log(Like)
         return (
             <div className='container flex flex-col items-center justify-center'>
 
