@@ -1,49 +1,28 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
-export class addPost extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            
-                name:'',
-                content:'',
-                likes:0        
-            
-        }
+const AddPost = ({addPostHandler}) => {
+    //id:Date.now() temporary id. temporary solution
+    const [post, setPost] = useState({ id:Date.now(), username:'', content:'', likes:0, createdAt:Date.now()})
 
+    const addPost = async() => {
+        if(post.username === ''){ alert('empty username') 
+        return}
+        if(post.content ===''){ alert('empty content') 
+        return}
+        addPostHandler(post)
+        setPost({id:Date.now(), username:'', content:'', likes:0, createdAt:Date.now()})
     }
 
-    handleNameChange = (e) => {
-        this.setState({
-            name:e.target.value
-        })
-    }
-
-    handleContentChange = (e) => {
-        e.preventDefault()
-        this.setState({
-            content:e.target.value
-        })
-    }
-
-    handleSubmit = (e) => {
-        this.setState({
-            content:'',
-            name:''
-        })
-        this.props.postHandler(this.state)
-    }
-    render() {
-        return (
-            <div className="flex mx-auto items-center justify-center shadow-lg max-w-lg">
+    return (
+        <div className="flex mx-auto items-center justify-center shadow-lg max-w-lg">
    <form className="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
       <div className="flex flex-wrap -mx-3 mb-6">
          <h2 className="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new comment</h2>
          <div className="w-full md:w-full px-3 mb-2 mt-2">
-            <input className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="name" placeholder='Username' required value={this.state.name} onChange={this.handleNameChange} />
+            <input className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="username" placeholder='Username' required value={post.username} onChange={(e) => { setPost({...post,username : e.target.value}) }} />
          </div>
          <div className="w-full md:w-full px-3 mb-2 mt-2">
-            <textarea className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="content" placeholder='Type Your Comment' required value={this.state.content} onChange={this.handleContentChange}></textarea>
+            <textarea className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="content" placeholder='Type Your Comment' required value={post.content} onChange={(e) => {setPost({...post,content : e.target.value})}}></textarea>
          </div>
          <div className="w-full md:w-full flex items-start px-3">
             <div className="flex items-start w-1/2 text-gray-700 px-2 mr-auto">
@@ -53,14 +32,13 @@ export class addPost extends Component {
                <p className="text-xs md:text-sm pt-px">Feel free to tell.</p>
             </div>
             <div className="-mr-1">
-               <input type='button' className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100" value='Post Comment' onClick={this.handleSubmit} />
+               <input type='button' className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100" value='Post Comment' onClick={ addPost } />
             </div>
          </div>
          </div>
       </form>
    </div>
-        )
-    }
+    )
 }
 
-export default addPost
+export default AddPost
