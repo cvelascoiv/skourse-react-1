@@ -2,19 +2,28 @@
 
 ## About the application
 
-Demo application for Skourse lecture Introduction to React. 
+Demo application for Skourse lecture Introduction to React.
 
 ## How to run the application
 
-1. `npm install`
-2. `npm start`
+1. `clone repo`
+2. `npm install`
+3. `npm start`
+
+## Features
+
+-List Posts from latest
+-Initial Display of 10 Posts
+-Can toggle to view more or view less posts
+-Can add Post
+-Can toggle post visibility
+-Can like Post
 
 ## TODO:
 
-Create a button that will add a new post object to the posts state every time the button is pressed.
-
-Extras:
-
-1. Design your application
-2. Use `input` to dynamically add user inputted content and name on the post
-3. Add the base application (demo) as a commit and push it to master then branching out to another branch when doing this activity considering it as a new feature to be added to the app.
+-Use additional react hooks
+-Component/Function to Edit Own Post
+-Component/Function to view and unhide Post
+-Component/Function to add avatar
+-Component/Function to unlike post
+-add Nav section for design
