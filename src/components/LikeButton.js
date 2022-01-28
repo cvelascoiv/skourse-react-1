@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import Like from "../like.svg";
 
-const LikeButton = ({likes}) => {
-    const [count, setCount] = useState(likes);
+//currently not used until additional hooks
+const LikeButton = ({ likes }) => {
+  const [count, setCount] = useState(likes);
 
- const increment = () => {
+  const increment = () => {
     setCount(count + 1);
   };
 
@@ -16,6 +17,6 @@ const LikeButton = ({likes}) => {
       </button>
     </div>
   );
-}
+};
 
-export default LikeButton
+export default LikeButton;
