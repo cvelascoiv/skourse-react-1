@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-const { faker } = require("@faker-js/faker");
 
 const AddPost = ({ addPostHandler }) => {
+  //declare initial state
   const [post, setPost] = useState({
-    id: faker.datatype.uuid(),
     username: "",
     title: "",
     content: "",
     likes: 0,
-    createdAt: Date.now(),
     visible: true,
-    avatar: faker.image.avatar(),
   });
 
-  const addPost = () => {
+  //function to add new post
+  const addPost = (e) => {
+    e.preventDefault();
+    //simple form handling
     if (post.username === "") {
       alert("empty username");
       return;
@@ -27,17 +27,17 @@ const AddPost = ({ addPostHandler }) => {
       return;
     }
 
+    //submit post to parent component
     addPostHandler(post);
 
+    //reset post state
     setPost({
-      id: faker.datatype.uuid(),
+      id: "",
       username: "",
       title: "",
       content: "",
       likes: 0,
-      createdAt: Date.now(),
       visible: true,
-      avatar: faker.image.avatar(),
     });
   };
 

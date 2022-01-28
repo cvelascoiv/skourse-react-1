@@ -4,19 +4,23 @@ import AddPost from "./components/AddPost";
 import postsDataFaker from "./postsDataFaker";
 import Plus from "./plus.svg";
 import Minus from "./minus.svg";
+const { faker } = require("@faker-js/faker");
 
 //using useState only
 //useEffect and other hooks feature will be added later
 
 const App = () => {
+  //declare states
   const [posts, setPosts] = useState(postsDataFaker);
   const [showedPostsCount, setShowedPostsCount] = useState(10);
 
+  //filters, sort, and slice posts to be displayed
   const postToShow = posts
     .filter((post) => post.visible === true)
     .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
     .slice(0, showedPostsCount);
 
+  //function for incrementing likes
   const increment = (id) => {
     setPosts(
       posts.map((post) => {
@@ -27,6 +31,8 @@ const App = () => {
       })
     );
   };
+
+  //hide post
   const toggleVisibility = (id) => {
     setPosts(
       posts.map((post) => {
@@ -38,6 +44,28 @@ const App = () => {
     );
   };
 
+  //use for scrolling after adding a post
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  //add post
+  const addPost = (post) => {
+    //add additional data
+    let newpost = {
+      ...post,
+      id: faker.datatype.uuid(),
+      createdAt: Date.now(),
+      avatar: faker.image.avatar(),
+    };
+    setPosts([...posts, newpost]);
+    scrollToTop();
+  };
+
+  //render jsx with complicated display criteria
   const renderShowArrow = () => {
     if (postToShow.length !== 0 && showedPostsCount == 10) {
       return (
@@ -97,10 +125,6 @@ const App = () => {
         </div>
       );
     }
-  };
-
-  const addPost = (post) => {
-    setPosts([post, ...posts]);
   };
 
   return (
